@@ -3,7 +3,7 @@
 # df             : is a df that created by rbind_data function
 # keywords.vector: is the keywords.vector that makes sure the words we are interested in can be segemented accurately.
 # top            : if top = 20, then it returns top 20 words, otherwise it returns full matrix.
-#only.keywords   : if only.keywords = T, then it only returns the counted matrix of the words in keywords.vecotors.
+# only.keywords  : if only.keywords = T, then it only returns the counted matrix of the words in keywords.vecotors.
 count_words <- function(df, keywords.vector, top = NULL, only.keywords = F){
   
                           jieba.engine <- worker()
