@@ -3,6 +3,7 @@
 
 ## filtering the item's url_id and title which contain "+" or "*"
 ## to find out the set item.(combination)
+## need jiebaR library
 
 filter_combination <- function(df, return.csv = F){
   
