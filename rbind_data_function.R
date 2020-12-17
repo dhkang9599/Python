@@ -26,7 +26,7 @@ rbind_data <- function(path, type){
   file_data <- file_list[[1]]                                  # load first element(file) in file list to bind all docs together
   
   for(i in 2:length(target_file)){
-    file_data <- rbind(file_data, file_list[[2]])            # bind them 
+    file_data <- rbind(file_data, file_list[[i]])            # bind them 
   }
   
   return(file_data)                                            # return binded data
