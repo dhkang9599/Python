@@ -75,6 +75,44 @@ colnames(plat_avg_mon) <- c("日期","天猫国际","天猫中国","淘宝国际
 plat_avg_mon[,2:5] <- round(plat_avg_mon[,2:5],0)
 plat_avg_mon
 
+######画图
+library(ggplot2)
+library(RColorBrewer)
+library(scales)
+display.brewer.all(type = "all")
+brewer.pal(9, "Blues")
+subset(plat_revenue_mon, plat_revenue_mon$日期>='2019-10'& plat_revenue_mon$日期<='2020-10')
+
+ggplot(aes(x = 日期, y = TTL), 
+       data = subset(plat_revenue_mon, plat_revenue_mon$日期 >= '2019-10'& plat_revenue_mon$日期 <= '2020-10')) +
+  geom_col(fill = brewer.pal(9, "Blues")[7], width = 0.6) +
+  geom_line() 
+
+
+ggplot() +
+  geom_col(aes(x = 日期, y = TTL), 
+           data = subset(plat_revenue_mon, plat_revenue_mon$日期 >= '2019-10'& plat_revenue_mon$日期 <= '2020-10'),
+           fill = brewer.pal(9, "Blues")[7], width = 0.6) + 
+  geom_text(data = subset(plat_revenue_mon, plat_revenue_mon$日期 >= '2019-10'& plat_revenue_mon$日期 <= '2020-10'),
+            aes(y=TTL, x= 日期, label = TTL) ,
+            position=position_dodge(.9)) +
+  geom_line(data = subset(plat_revenue_mon, plat_revenue_mon$日期 >= '2019-10'& plat_revenue_mon$日期 <= '2020-10'),
+            aes(x = 日期, y = rescale(MoM,c(-10,30)),group = 1, color = "#ee8f71"), size = 1) +
+  geom_point(data = subset(plat_revenue_mon, plat_revenue_mon$日期 >= '2019-10'& plat_revenue_mon$日期 <= '2020-10'), 
+             aes(x = 日期,y = rescale(MoM,c(-10,30))),shape=21,fill="white",size = 2) +
+  scale_y_continuous(breaks=pretty_breaks(5),
+                     sec.axis = sec_axis( ~ rescale(.,c(-0.4,1.2)),
+                                          name = "Categroy",labels=sprintf("%d%%", seq(-4,12,4) * 10)))+
+  theme_minimal(base_size=16) %+replace% 
+  theme(
+    plot.caption = element_text(hjust=0),
+    plot.margin = unit(c(1,0.5,1,0.5), "lines"))
+
+
+
+
+
+
 
 
 
